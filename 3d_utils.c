@@ -1,0 +1,100 @@
+#include "cub3D.h"
+
+static void	calculate_wall_position(t_list *list, double ray_angle, 
+							double *wall_x, int *side)
+{
+	double	ray_dir_x;
+	double	ray_dir_y;
+
+	ray_dir_x = cos(ray_angle);
+	ray_dir_y = sin(ray_angle);
+	if (list->hd < list->vd)
+		*side = 1;
+	else
+		*side = 0;
+	if (*side == 1)
+		*wall_x = list->hwallx;
+	else
+		*wall_x = list->vwally;
+}
+
+static int	calculate_texture_x(mlx_texture_t *texture, double wall_x,
+							t_list *list, int side)
+{
+	double	offset;
+	int		tex_x;
+	double	ray_dir_x;
+	double	ray_dir_y;
+
+	offset = fmod(wall_x, (double)list->tail) / (double)list->tail;
+	if (offset < 0)
+		offset += 1.0;
+	tex_x = (int)(offset * texture->width);
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= (int)texture->width)
+		tex_x = texture->width - 1;
+	ray_dir_x = cos(list->ray_angle);
+	ray_dir_y = sin(list->ray_angle);
+	if ((side == 0 && ray_dir_x < 0) || (side == 1 && ray_dir_y > 0))
+		tex_x = texture->width - tex_x - 1;
+	return (tex_x);
+}
+
+static uint32_t	get_pixel_color(mlx_texture_t *texture, int tex_x, int ty)
+{
+	int			pixel_index;
+	uint32_t	color;
+
+	if (ty < 0)
+		ty = 0;
+	if (ty >= (int)texture->height)
+		ty = texture->height - 1;
+	pixel_index = (ty * texture->width + tex_x) * 4;
+	color = (texture->pixels[pixel_index] << 24)
+		| (texture->pixels[pixel_index + 1] << 16)
+		| (texture->pixels[pixel_index + 2] << 8) | 255;
+	return (color);
+}
+
+static void	render_wall_column(t_list *list, mlx_texture_t *texture,
+							int screen_x, int tex_x)
+{
+	int		wall_height;
+	double	tex_step;
+	double	tex_pos;
+	int		sy;
+
+	wall_height = list->down - list->top;
+	if (wall_height <= 0)
+		return ;
+	tex_step = (double)texture->height / wall_height;
+	tex_pos = 0.0;
+	sy = list->top;
+	while (sy < list->down)
+	{
+		if (sy >= 0 && sy < list->h)
+		{
+			mlx_put_pixel(list->win, screen_x, sy,
+				get_pixel_color(texture, tex_x, (int)tex_pos));
+		}
+		tex_pos += tex_step;
+		sy++;
+	}
+}
+
+void	draw_wall_texture(t_list *list, int screen_x, double ray_angle)
+{
+	mlx_texture_t	*texture;
+	double			wall_x;
+	int				tex_x;
+	int				side;
+
+	texture = get_wall_texture(list, ray_angle);
+	if (!texture || !texture->pixels)
+		return ;
+	calculate_wall_position(list, ray_angle, &wall_x, &side);
+	list->ray_angle = ray_angle;
+	tex_x = calculate_texture_x(texture, wall_x, list, side);
+	render_wall_column(list, texture, screen_x, tex_x);
+}
