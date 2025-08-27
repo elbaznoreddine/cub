@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:49:41 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 11:25:14 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 12:08:47 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ t_list	*list_init(t_game *game)
 	list->h = 720;
 	list->ww = list->tail * list->cols;
 	list->wh = list->tail * list->rows;
-	list->mlx = mlx_init(list->w, list->h, "cub3D", true);
+	list->mlx = mlx_init(list->w, list->h, "cub3D", 0);
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	list->win = mlx_new_image(list->mlx, list->w, list->h);
 	mlx_image_to_window(list->mlx, list->win, 0, 0);
 	list->pi = M_PI;
 	list->fov = 60 * (list->pi / 180);
 	list->v = game->direction;
-	list->mspeed = 7;
-	list->rspeed = 2 * (list->pi / 180);
+	list->mspeed = 10;
+	list->rspeed = 10 * (list->pi / 180);
 	list->vy = sin(list->v);
 	list->vx = cos(list->v);
 	list->game = game;

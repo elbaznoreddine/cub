@@ -6,7 +6,7 @@
 /*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 13:06:16 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/24 15:20:44 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/08/27 12:19:21 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,16 @@ int	to_move(t_list *list, double y, double x)
 	i = 0;
 	py = list->py;
 	px = list->px;
+	if (is_wall(list, py + (y * 20), px + (x * 20)) > 0)
+		return (0);
+	if (is_wall(list, py + (y * 20) + 5, px + (x * 20)) > 0)
+		return (0);
+	if (is_wall(list, py + (y * 20) - 5, px + (x * 20)) > 0)
+		return (0);
+	if (is_wall(list, py + (y * 20), px + (x * 20) + 5) > 0)
+		return (0);
+	if (is_wall(list, py + (y * 20), px + (x * 20) - 5) > 0)
+		return (0);
 	while (i < list->mspeed)
 	{
 		py += y;

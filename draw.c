@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:00:32 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 11:32:57 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 12:04:55 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,16 @@ int	to_move(t_list *list, double y, double x)
 	i = 0;
 	py = list->py;
 	px = list->px;
+	if (is_wall(list, py + (y * 20), px + (x * 20)) > 0)
+		return (0);
+	if (is_wall(list, py + (y * 20) + 5, px + (x * 20)) > 0)
+		return (0);
+	if (is_wall(list, py + (y * 20) - 5, px + (x * 20)) > 0)
+		return (0);
+	if (is_wall(list, py + (y * 20), px + (x * 20) + 5) > 0)
+		return (0);
+	if (is_wall(list, py + (y * 20), px + (x * 20) - 5) > 0)
+		return (0);
 	while (i < list->mspeed)
 	{
 		py += y;
