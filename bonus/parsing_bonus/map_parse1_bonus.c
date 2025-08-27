@@ -23,8 +23,8 @@ int	is_valid_map_character(char c, t_map *map, int y, int x)
 {
 	if (c == 'D')
 	{
-		if ((map->grid[y + 1][x] == '0' || map->grid[y - 1][x] == '0')
-			&& (map->grid[y][x + 1] == '0' || map->grid[y][x - 1] == '0'))
+		if ((map->grid[y + 1][x] != '1' || map->grid[y - 1][x] != '1')
+			&& (map->grid[y][x + 1] != '1' || map->grid[y][x - 1] != '1'))
 			return (0);
 	}
 	if (c != '1' && c != '0' && c != 'N' && c != 'S'
