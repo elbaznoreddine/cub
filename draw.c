@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:00:32 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/23 13:29:07 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 11:32:57 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	draw_p0(t_list *list)
 		x = 0;
 		while (list->line[y][x])
 		{
-			if (list->line[y][x] == 'N' | list->line[y][x] == 'E' | list->line[y][x] == 'W' | list->line[y][x] == 'S')
+			if (list->line[y][x] == 'N' | list->line[y][x] == 'E'
+				| list->line[y][x] == 'W' | list->line[y][x] == 'S')
 			{
 				list->py = y * list->tail + 32;
 				list->px = x * list->tail + 32;
@@ -45,7 +46,8 @@ int	is_wall(t_list *list, double y, double x)
 		return (1);
 	j = floor(y / list->tail);
 	i = floor(x / list->tail);
-	if (list->line[(int) j][(int) i] == '1' || (list->line[(int) j][(int) i] == 32))
+	if (list->line[(int) j][(int) i] == '1'
+		|| (list->line[(int) j][(int) i] == 32))
 		return (1);
 	return (0);
 }

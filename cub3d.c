@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:49:41 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/26 12:38:26 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 11:25:14 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,34 +50,34 @@ void	anime(void	*param)
 	(move0(list), move1(list), move11(list), move2(list), draw_p(list));
 }
 
-mlx_texture_t *load_png_texture(char *path)
+mlx_texture_t	*load_png_texture(char *path)
 {
-    mlx_texture_t *texture;
-    
-    texture = mlx_load_png(path);
-    if (!texture)
-    {
-        printf("Error: Failed to load texture: %s\n", path);
-        return (NULL);
-    }
-    return (texture);
+	mlx_texture_t	*texture;
+
+	texture = mlx_load_png(path);
+	if (!texture)
+	{
+		printf("Error: Failed to load texture: %s\n", path);
+		return (NULL);
+	}
+	return (texture);
 }
 
-int load_all_textures(t_list *list)
+int	load_all_textures(t_list *list)
 {
-    list->north_texture = load_png_texture(list->game->config->path_north);
-    if (!list->north_texture)
-        return (0);
-    list->south_texture = load_png_texture(list->game->config->path_south);
-    if (!list->south_texture)
-        return (0);
-    list->east_texture = load_png_texture(list->game->config->path_east);
-    if (!list->east_texture)
-        return (0);
-    list->west_texture = load_png_texture(list->game->config->path_west);
-    if (!list->west_texture)
-        return (0);
-    return (1);
+	list->north_texture = load_png_texture(list->game->config->path_north);
+	if (!list->north_texture)
+		return (0);
+	list->south_texture = load_png_texture(list->game->config->path_south);
+	if (!list->south_texture)
+		return (0);
+	list->east_texture = load_png_texture(list->game->config->path_east);
+	if (!list->east_texture)
+		return (0);
+	list->west_texture = load_png_texture(list->game->config->path_west);
+	if (!list->west_texture)
+		return (0);
+	return (1);
 }
 
 int	logic(t_list *list, t_game *game)
@@ -93,16 +93,12 @@ int	logic(t_list *list, t_game *game)
 	mlx_terminate(list->mlx);
 	return (1);
 }
-void f()
-{
-	system("leaks cub3D");
-}
+
 int	main(int ac, char **av)
 {
 	t_list	*list;
 	t_game	*game;
 
-	atexit(f);
 	list = NULL;
 	game = NULL;
 	if (ac != 2)

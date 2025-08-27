@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 15:26:12 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/24 15:20:52 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/08/27 11:44:39 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,8 @@ int	is_door(t_list *list)
 			list->hwally -= 1;
 		else
 			list->hwally += 1;
-		if (list->hwallx < 0 || list->hwallx >= list->ww || list->hwally < 0 || list->hwally >= list->wh)
+		if (list->hwallx < 0 || list->hwallx >= list->ww || list->hwally < 0
+			|| list->hwally >= list->wh)
 			return (0);
 		if (list->line[(int) floor(list->hwally / list->tail)][(int) \
 		floor(list->hwallx / list->tail)] == 'D')
@@ -102,7 +103,8 @@ int	is_door(t_list *list)
 			list->vwallx -= 1;
 		else
 			list->vwallx += 1;
-		if (list->vwallx < 0 || list->vwallx >= list->ww || list->vwally < 0 || list->vwally >= list->wh)
+		if (list->vwallx < 0 || list->vwallx >= list->ww || list->vwally < 0
+			|| list->vwally >= list->wh)
 			return (0);
 		if (list->line[(int) floor(list->vwally / list->tail)][(int) \
 		floor(list->vwallx / list->tail)] == 'D')

@@ -6,46 +6,42 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:38:58 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/26 10:45:45 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 11:36:19 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-mlx_texture_t *get_wall_texture(t_list *list, double ray_angle)
+mlx_texture_t	*get_wall_texture(t_list *list, double ray_angle)
 {
-    double	rayDirX;
-    double	rayDirY;
-    int		side;
+	double	ray_x;
+	double	ray_y;
+	int		side;
 
-	rayDirX = cos(ray_angle);
-	rayDirY = sin(ray_angle);
+	(1) && (ray_x = cos(ray_angle), ray_y = sin(ray_angle));
 	if (is_door(list))
-	{
 		return (list->door_texture);
+	if (list->hd < list->vd)
+		side = 1;
+	else
+		side = 0;
+	if (side == 1)
+	{
+		if (ray_y > 0)
+			return (list->north_texture);
+		else
+			return (list->south_texture);
 	}
-    if (list->hd < list->vd)
-        side = 1;
-	else
-        side = 0;
-    if (side == 1)
-	{
-        if (rayDirY > 0)
-            return list->north_texture;
-        else
-            return list->south_texture;
-    }
 	else
 	{
-        if (rayDirX > 0)
-            return list->west_texture;
-        else
-            return list->east_texture;
+		if (ray_x > 0)
+			return (list->west_texture);
+		else
+			return (list->east_texture);
 	}
 }
 
-
-void draw_3dwall(t_list *list, int i, double v)
+void	draw_3dwall(t_list *list, int i, double v)
 {
 	int	z;
 

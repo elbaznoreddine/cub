@@ -66,8 +66,7 @@ int	parse_config(t_game *game, int fd, char **first_map_line)
 	game->config = malloc(sizeof(t_config));
 	if (!game->config)
 		return (0);
-	setup_empty_config(game->config);
-	line = get_next_line(fd);
+	(1) && (setup_empty_config(game->config), line = get_next_line(fd));
 	while (line)
 	{
 		if (!line || line[0] == '\0' || line[0] == '\n')
