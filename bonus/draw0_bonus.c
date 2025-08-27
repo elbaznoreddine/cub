@@ -6,7 +6,7 @@
 /*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 13:06:16 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 12:19:21 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:27:43 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,26 @@ void	anime0(t_list *list, mlx_texture_t	*texture)
 	}
 }
 
+char	*get_img(int j)
+{
+	char			*ptr;
+	char			*ptr1;
+
+	ptr1 = ft_itoa(j);
+	if (!ptr1)
+		return (0);
+	ptr = ft_strjoin(ft_strdup("bonus/png/"), ptr1);
+	if (!ptr)
+	{
+		free(ptr1);
+		return (0);
+	}
+	ptr = ft_strjoin(ptr, ".png");
+	if (!ptr)
+		return (0);
+	return (ptr);
+}
+
 void	anime(void	*param)
 {
 	t_list			*list;
@@ -86,25 +106,28 @@ void	anime(void	*param)
 	char			*ptr;
 	mlx_texture_t	*texture;
 
+	ptr = 0;
 	list = param;
 	(move0(list), move1(list), move11(list), move2(list), draw_p(list));
 	j++;
-	ptr = ft_strjoin(ft_strdup("bonus/png/"), ft_itoa(j));
-	ptr = ft_strjoin(ptr, ".png");
+	ptr = get_img(j);
+	if (!ptr)
+		return ;
 	texture = mlx_load_png(ptr);
+	free(ptr);
+	if (!texture)
+		return ;
 	anime0(list, texture);
 	if (j == 40)
 		j = 0;
 	mlx_delete_texture(texture);
 }
 
-int	to_move(t_list *list, double y, double x)
+int	to_move0(t_list *list, double y, double x)
 {
-	int		i;
 	double	px;
 	double	py;
 
-	i = 0;
 	py = list->py;
 	px = list->px;
 	if (is_wall(list, py + (y * 20), px + (x * 20)) > 0)
@@ -117,7 +140,21 @@ int	to_move(t_list *list, double y, double x)
 		return (0);
 	if (is_wall(list, py + (y * 20), px + (x * 20) - 5) > 0)
 		return (0);
-	while (i < list->mspeed)
+	return (1);
+}
+
+int	to_move(t_list *list, double y, double x)
+{
+	int		i;
+	double	px;
+	double	py;
+
+	i = 0;
+	py = list->py;
+	px = list->px;
+	if (!to_move0(list, y, x))
+		return (0);
+	while (i++ < list->mspeed)
 	{
 		py += y;
 		px += x;
@@ -131,7 +168,6 @@ int	to_move(t_list *list, double y, double x)
 			return (0);
 		if (is_wall(list, py, px - 1) > 0)
 			return (0);
-		i++;
 	}
 	return (1);
 }
