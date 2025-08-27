@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:49:41 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/26 12:46:54 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 12:20:05 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,19 @@ t_list	*list_init(t_game *game)
 	list->h = 720;
 	list->ww = list->tail * list->cols;
 	list->wh = list->tail * list->rows;
-	list->mlx = mlx_init(list->w, list->h, "cub3D", true);
+	list->mlx = mlx_init(list->w, list->h, "cub3D", 0);
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	list->win = mlx_new_image(list->mlx, list->w, list->h);
 	mlx_image_to_window(list->mlx, list->win, 0, 0);
 	list->pi = M_PI;
 	list->fov = 60 * (list->pi / 180);
 	list->v = game->direction;
-	list->mspeed = 13;
+	list->mspeed = 10;
 	list->rspeed = 10 * (list->pi / 180);
 	list->vy = sin(list->v);
 	list->vx = cos(list->v);
     list->mouse_sens = 0.003;
 	list->mouse_flag = 0;
-    // mlx_set_cursor_mode(list->mlx, MLX_MOUSE_HIDDEN);
 	list->game = game;
 	return (list);
 }
@@ -104,7 +103,6 @@ int	logic(t_list *list, t_game *game)
 		return (0);
 	draw_p0(list);
 	mlx_key_hook(list->mlx, &move, list);
-    // mlx_cursor_hook(list->mlx, &mouse, list);
 	mlx_loop_hook(list->mlx, &anime, list);
 	mlx_loop(list->mlx);
 	mlx_terminate(list->mlx);
@@ -116,7 +114,6 @@ int	main(int ac, char **av)
 	t_list	*list;
 	t_game	*game;
 
-	// atexit(f);
 	game = NULL;
 	list = NULL;
 	if (ac != 2)

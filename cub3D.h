@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:46:43 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/26 10:24:59 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/26 15:01:06 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include "/mnt/homes/noel-baz/Documents/MLX42/include/MLX42/MLX42.h"
+# include "/mnt/homes/yzoullik/Documents/MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42

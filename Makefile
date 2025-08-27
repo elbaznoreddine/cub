@@ -3,18 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+         #
+#    By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/05 11:46:20 by yzoullik          #+#    #+#              #
-#    Updated: 2025/08/26 10:47:15 by noel-baz         ###   ########.fr        #
+#    Updated: 2025/08/27 12:09:54 by yzoullik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=cub3D
-# MFLAGS = -lmlx -framework OpenGL -framework Appkit
-FLAGS= -Werror -Wextra -Wall #-fsanitize=address -g3
-MLX_DIR = /mnt/homes/noel-baz/Documents/MLX42
-MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit $(MLX_DIR)/build/libmlx42.a  -Iinclude -lglfw -L"/mnt/homes/noel-baz/.brew/opt/glfw/lib"
+FLAGS= -Werror -Wextra -Wall
+MLX_DIR = /mnt/homes/yzoullik/Documents/MLX42
+MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit $(MLX_DIR)/build/libmlx42.a  -Iinclude -lglfw -L"/mnt/homes/yzoullik/.brew/opt/glfw/lib"
 
 PARSE= parsing/func_utils/utils_1.c parsing/utils_parse.c parsing/parse_config.c parsing/get_next_line.c \
 	   parsing/func_utils/utils_2.c parsing/parse.c parsing/map_parse.c parsing/map_parse1.c \
@@ -50,18 +49,16 @@ BOBJ=$(BPARSE:.c=.o) $(BEXEC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ) cub3D.h
-	@cc $(FLAGS) $(MFLAGS) $(OBJ) -o $(NAME) $(MLXFLAGS)
-	@echo "Compilation done;"
+	cc $(FLAGS) $(MFLAGS) $(OBJ) -o $(NAME) $(MLXFLAGS)
 
 bonus: $(BOBJ) bonus/cub3D_bonus.h
-	@cc $(FLAGS) $(MFLAGS) $(BOBJ) -o $(NAME)_bonus $(MLXFLAGS)
-	@echo "Compilation done;"
+	cc $(FLAGS) $(MFLAGS) $(BOBJ) -o $(NAME)_bonus $(MLXFLAGS)
 
 %.o:%.c cub3D.h bonus/cub3D_bonus.h
-	@cc $(FLAGS) $(MFLAGS) -c $< -o $@
+	cc $(FLAGS) $(MFLAGS) -c $< -o $@
 clean:
-	@rm -rf $(OBJ) $(BOBJ)
+	rm -rf $(OBJ) $(BOBJ)
 fclean: clean
-	@rm -rf $(NAME) $(NAME)_bonus
+	rm -rf $(NAME) $(NAME)_bonus
 
 re: fclean all
