@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 15:19:23 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/26 14:19:12 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 11:48:26 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,11 @@ int	move2(t_list *list)
 	}
 	return (0);
 }
+
 void	open_door(t_list *list)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = floor(list->px / list->tail);
 	y = floor(list->py / list->tail);
@@ -110,11 +111,12 @@ void	open_door(t_list *list)
 		list->line[y][x + 1] = 'd';
 	if (list->line[y][x - 1] == 'D')
 		list->line[y][x - 1] = 'd';
-} 
+}
+
 void	close_door(t_list *list)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = floor(list->px / list->tail);
 	y = floor(list->py / list->tail);
@@ -126,18 +128,22 @@ void	close_door(t_list *list)
 		list->line[y][x + 1] = 'D';
 	if (list->line[y][x - 1] == 'd')
 		list->line[y][x - 1] = 'D';
-} 
+}
+
 void	move(mlx_key_data_t keydata, void	*param)
 {
 	t_list	*list;
 
 	list = param;
 	mlx_set_cursor_mode(list->mlx, MLX_MOUSE_HIDDEN);
-	if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS && !list->mouse_flag)
+	if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS
+		&& !list->mouse_flag)
 		list->mouse_flag = 1;
-	if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS && list->mouse_flag)
+	if (keydata.key == MLX_KEY_L && keydata.action == MLX_PRESS
+		&& list->mouse_flag)
 		mlx_cursor_hook(list->mlx, &mouse, list);
-	if (keydata.key == MLX_KEY_K && keydata.action == MLX_PRESS && list->mouse_flag)
+	if (keydata.key == MLX_KEY_K && keydata.action == MLX_PRESS
+		&& list->mouse_flag)
 		list->mouse_flag = 0;
 	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
 		exit(0);
@@ -149,25 +155,25 @@ void	move(mlx_key_data_t keydata, void	*param)
 		return ;
 }
 
-void mouse(double xpos, double ypos, void *param)
+void	mouse(double xpos, double ypos, void *param)
 {
-    t_list *list;
-    int delta_x;
-    (void)ypos;
+	t_list	*list;
+	int		delta_x;
 
+	(void)ypos;
 	list = (t_list *)param;
 	if (!list->mouse_flag)
 		return ;
-    delta_x = (int)xpos - (list->w / 2);
-    if (abs(delta_x) > 2)
+	delta_x = (int)xpos - (list->w / 2);
+	if (abs(delta_x) > 2)
 	{
-        list->v += delta_x * list->mouse_sens;
-        if (list->v > 2 * list->pi)
-            list->v -= 2 * list->pi;
-        if (list->v < 0)
-            list->v += 2 * list->pi;
-        list->vy = sin(list->v);
-        list->vx = cos(list->v);
-        mlx_set_mouse_pos(list->mlx, list->w / 2, list->h / 2);
-    }
+		list->v += delta_x * list->mouse_sens;
+		if (list->v > 2 * list->pi)
+			list->v -= 2 * list->pi;
+		if (list->v < 0)
+			list->v += 2 * list->pi;
+		list->vy = sin(list->v);
+		list->vx = cos(list->v);
+		mlx_set_mouse_pos(list->mlx, list->w / 2, list->h / 2);
+	}
 }

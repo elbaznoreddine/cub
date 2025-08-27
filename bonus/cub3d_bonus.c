@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:49:41 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/26 12:46:54 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 11:39:13 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ t_list	*list_init(t_game *game)
 	list->rspeed = 10 * (list->pi / 180);
 	list->vy = sin(list->v);
 	list->vx = cos(list->v);
-    list->mouse_sens = 0.003;
+	list->mouse_sens = 0.003;
 	list->mouse_flag = 0;
-    // mlx_set_cursor_mode(list->mlx, MLX_MOUSE_HIDDEN);
 	list->game = game;
 	return (list);
 }
@@ -54,7 +53,8 @@ int	is_wall(t_list *list, double y, double x)
 		return (1);
 	j = floor(y / list->tail);
 	i = floor(x / list->tail);
-	if (list->line[(int) j][(int) i] == '1' || list->line[(int) j][(int) i] == 32)
+	if (list->line[(int) j][(int) i] == '1'
+		|| list->line[(int) j][(int) i] == 32)
 		return (1);
 	if (list->line[(int) j][(int) i] == 'D')
 		return (2);
@@ -63,37 +63,37 @@ int	is_wall(t_list *list, double y, double x)
 	return (0);
 }
 
-mlx_texture_t *load_png_texture(char *path)
+mlx_texture_t	*load_png_texture(char *path)
 {
-    mlx_texture_t *texture;
-    
-    texture = mlx_load_png(path);
-    if (!texture)
-    {
-        printf("Error: Failed to load texture: %s\n", path);
-        return (NULL);
-    }
-    return (texture);
+	mlx_texture_t	*texture;
+
+	texture = mlx_load_png(path);
+	if (!texture)
+	{
+		printf("Error: Failed to load texture: %s\n", path);
+		return (NULL);
+	}
+	return (texture);
 }
 
-int load_all_textures(t_list *list)
+int	load_all_textures(t_list *list)
 {
-    list->north_texture = load_png_texture(list->game->config->path_north);
-    if (!list->north_texture)
-        return (0);
-    list->south_texture = load_png_texture(list->game->config->path_south);
-    if (!list->south_texture)
-        return (0);
-    list->east_texture = load_png_texture(list->game->config->path_east);
-    if (!list->east_texture)
-        return (0);
-    list->west_texture = load_png_texture(list->game->config->path_west);
-    if (!list->west_texture)
-        return (0);
-    list->door_texture = load_png_texture("textures/d1.png");
-    if (!list->door_texture)
-        return (0);
-    return (1);
+	list->north_texture = load_png_texture(list->game->config->path_north);
+	if (!list->north_texture)
+		return (0);
+	list->south_texture = load_png_texture(list->game->config->path_south);
+	if (!list->south_texture)
+		return (0);
+	list->east_texture = load_png_texture(list->game->config->path_east);
+	if (!list->east_texture)
+		return (0);
+	list->west_texture = load_png_texture(list->game->config->path_west);
+	if (!list->west_texture)
+		return (0);
+	list->door_texture = load_png_texture("textures/d1.png");
+	if (!list->door_texture)
+		return (0);
+	return (1);
 }
 
 int	logic(t_list *list, t_game *game)
@@ -104,7 +104,6 @@ int	logic(t_list *list, t_game *game)
 		return (0);
 	draw_p0(list);
 	mlx_key_hook(list->mlx, &move, list);
-    // mlx_cursor_hook(list->mlx, &mouse, list);
 	mlx_loop_hook(list->mlx, &anime, list);
 	mlx_loop(list->mlx);
 	mlx_terminate(list->mlx);
@@ -116,7 +115,6 @@ int	main(int ac, char **av)
 	t_list	*list;
 	t_game	*game;
 
-	// atexit(f);
 	game = NULL;
 	list = NULL;
 	if (ac != 2)

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   3d_bonus_utils.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/27 12:10:20 by noel-baz          #+#    #+#             */
+/*   Updated: 2025/08/27 12:10:21 by noel-baz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3D_bonus.h"
 
-static void	calculate_wall_position(t_list *list, double ray_angle, 
+static void	calculate_wall_position(t_list *list, double ray_angle,
 							double *wall_x, int *side)
 {
 	double	ray_dir_x;

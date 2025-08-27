@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 16:38:58 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/26 10:45:28 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 11:19:36 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ mlx_texture_t	*get_wall_texture(t_list *list, double ray_angle)
 	}
 }
 
-void draw_3dwall(t_list *list, int i, double v)
+void	draw_3dwall(t_list *list, int i, double v)
 {
 	int	z;
 
