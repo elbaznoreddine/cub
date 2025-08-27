@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 15:26:12 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 11:44:39 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/27 16:55:07 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,22 @@ void	draw_miniplayer(t_list	*list)
 	}
 }
 
+void	draw_pixel(t_list *list, double i, double j, int s)
+{
+	if (s == 1)
+		mlx_put_pixel(list->win, i * list->f, j * list->f, \
+		get_rgba(0, 0, 0, 255));
+	if (s == 2)
+		mlx_put_pixel(list->win, i * list->f, j * list->f, \
+		get_rgba(255, 0, 0, 255));
+	if (s == -3)
+		mlx_put_pixel(list->win, i * list->f, j * list->f, \
+		get_rgba(0, 255, 0, 255));
+	else
+		mlx_put_pixel(list->win, i * list->f, j * list->f, \
+		get_rgba(128, 128, 128, 255));
+}
+
 void	draw_minimap(t_list *list)
 {
 	double	y;
@@ -48,38 +64,41 @@ void	draw_minimap(t_list *list)
 	double	i;
 	double	j;
 
-	i = 0;
 	j = 0;
 	y = list->py - 200;
-	x = list->px - 200;
 	while (j <= 400)
 	{
 		(1 && (i = 0, x = list->px - 200));
 		while (i++ <= 400)
 		{
 			if (is_wall(list, y, x) == 1)
-			{
-				mlx_put_pixel(list->win, i * list->f, j * list->f, \
-				get_rgba(0, 0, 0, 255));
-			}
+				draw_pixel(list, i, j, 1);
 			else if (is_wall(list, y, x) == 2)
-			{
-				mlx_put_pixel(list->win, i * list->f, j * list->f, \
-				get_rgba(255, 0, 0, 255));
-			}
+				draw_pixel(list, i, j, 2);
 			else if (is_wall(list, y, x) == -3)
-			{
-				mlx_put_pixel(list->win, i * list->f, j * list->f, \
-				get_rgba(0, 255, 0, 255));
-			}
+				draw_pixel(list, i, j, -3);
 			else
-				mlx_put_pixel(list->win, i * list->f, j * list->f, \
-				get_rgba(128, 128, 128, 255));
+				draw_pixel(list, i, j, 10);
 			x++;
 		}
 		(1 && j++, y++);
 	}
 	draw_miniplayer(list);
+}
+
+int	is_door0(t_list *list)
+{
+	if (list->left)
+		list->vwallx -= 1;
+	else
+		list->vwallx += 1;
+	if (list->vwallx < 0 || list->vwallx >= list->ww || list->vwally < 0
+		|| list->vwally >= list->wh)
+		return (0);
+	if (list->line[(int) floor(list->vwally / list->tail)][(int) \
+	floor(list->vwallx / list->tail)] == 'D')
+		return (1);
+	return (0);
 }
 
 int	is_door(t_list *list)
@@ -98,17 +117,6 @@ int	is_door(t_list *list)
 			return (1);
 	}
 	else
-	{
-		if (list->left)
-			list->vwallx -= 1;
-		else
-			list->vwallx += 1;
-		if (list->vwallx < 0 || list->vwallx >= list->ww || list->vwally < 0
-			|| list->vwally >= list->wh)
-			return (0);
-		if (list->line[(int) floor(list->vwally / list->tail)][(int) \
-		floor(list->vwallx / list->tail)] == 'D')
-			return (1);
-	}
+		return (is_door0(list));
 	return (0);
 }
