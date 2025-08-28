@@ -1,8 +1,8 @@
-NO textures/w1.png
+NO textures/cw.png
 C  200,200,200
-WE textures/w1.png
-SO textures/w1.png
-EA textures/w1.png
+WE textures/cw.png
+SO textures/cw.png
+EA textures/cw.png
 F   70,70,70
 
 111111111111111

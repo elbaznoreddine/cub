@@ -6,7 +6,7 @@
 /*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:49:41 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 12:20:05 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/08/28 14:07:06 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	load_all_textures(t_list *list)
 	list->west_texture = load_png_texture(list->game->config->path_west);
 	if (!list->west_texture)
 		return (0);
-	list->door_texture = load_png_texture("textures/d1.png");
+	list->door_texture = load_png_texture("textures/c.png");
 	if (!list->door_texture)
 		return (0);
 	return (1);
