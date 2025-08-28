@@ -6,7 +6,7 @@
 /*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 13:06:16 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 16:27:43 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:08:39 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,9 @@ void	anime0(t_list *list, mlx_texture_t	*texture)
 		{
 			i = (y * texture->width + x) * 4;
 			if (texture->pixels[i + 3] > 0)
-				mlx_put_pixel(list->win, x, y, \
-				((texture->pixels[i]) << 24) | ((texture->pixels[i + 1]) \
-				<< 16) | ((texture->pixels[i + 2]) \
-				<< 8) | texture->pixels[i + 3]);
+				mlx_put_pixel(list->win, x, y, get_rgba(texture->pixels[i], \
+				texture->pixels[i + 1], texture->pixels[i + 2], \
+				texture->pixels[i + 3]));
 			x++;
 		}
 		y++;

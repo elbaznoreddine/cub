@@ -6,12 +6,12 @@
 #    By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/05 11:46:20 by yzoullik          #+#    #+#              #
-#    Updated: 2025/08/27 12:09:54 by yzoullik         ###   ########.fr        #
+#    Updated: 2025/08/28 14:36:59 by yzoullik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=cub3D
-FLAGS= -Werror -Wextra -Wall
+FLAGS= -Werror -Wextra -Wall #-fsanitize=address -g3
 MLX_DIR = /mnt/homes/yzoullik/Documents/MLX42
 MLXFLAGS = -framework Cocoa -framework OpenGL -framework IOKit $(MLX_DIR)/build/libmlx42.a  -Iinclude -lglfw -L"/mnt/homes/yzoullik/.brew/opt/glfw/lib"
 

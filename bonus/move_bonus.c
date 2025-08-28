@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 15:19:23 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 11:48:26 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/08/28 15:10:33 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,8 +151,6 @@ void	move(mlx_key_data_t keydata, void	*param)
 		open_door(list);
 	if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)
 		close_door(list);
-	if (move0(list) || move1(list) || move11(list) || move2(list))
-		return ;
 }
 
 void	mouse(double xpos, double ypos, void *param)
