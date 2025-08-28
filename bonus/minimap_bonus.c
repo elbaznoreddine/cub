@@ -6,7 +6,7 @@
 /*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 15:26:12 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 16:55:07 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/08/28 14:03:46 by yzoullik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,6 @@ void	draw_pixel(t_list *list, double i, double j, int s)
 	if (s == 2)
 		mlx_put_pixel(list->win, i * list->f, j * list->f, \
 		get_rgba(255, 0, 0, 255));
-	if (s == -3)
-		mlx_put_pixel(list->win, i * list->f, j * list->f, \
-		get_rgba(0, 255, 0, 255));
-	else
-		mlx_put_pixel(list->win, i * list->f, j * list->f, \
-		get_rgba(128, 128, 128, 255));
 }
 
 void	draw_minimap(t_list *list)
@@ -71,14 +65,14 @@ void	draw_minimap(t_list *list)
 		(1 && (i = 0, x = list->px - 200));
 		while (i++ <= 400)
 		{
-			if (is_wall(list, y, x) == 1)
-				draw_pixel(list, i, j, 1);
-			else if (is_wall(list, y, x) == 2)
-				draw_pixel(list, i, j, 2);
+			if (is_wall(list, y, x) == 1 || is_wall(list, y, x) == 2)
+				draw_pixel(list, i, j, is_wall(list, y, x));
 			else if (is_wall(list, y, x) == -3)
-				draw_pixel(list, i, j, -3);
+				mlx_put_pixel(list->win, i * list->f, j * list->f, \
+				get_rgba(0, 255, 0, 255));
 			else
-				draw_pixel(list, i, j, 10);
+				mlx_put_pixel(list->win, i * list->f, j * list->f, \
+				get_rgba(128, 128, 128, 255));
 			x++;
 		}
 		(1 && j++, y++);
