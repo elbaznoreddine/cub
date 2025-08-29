@@ -71,7 +71,7 @@ int	process_config_line(t_game *game, char *line, int *element_type,
 
 	*element_type = identify_config_type(line);
 	if (*element_type == -1)
-		return (2);
+		return (0);
 	if (*element_type == 0)
 	{
 		*first_map_line = line;
