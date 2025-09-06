@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_config3.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/06 10:08:22 by noel-baz          #+#    #+#             */
+/*   Updated: 2025/09/06 10:12:18 by noel-baz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D.h"
 
 void	store_color(t_game *game, char **rgb_array, int color_type)
@@ -5,12 +17,14 @@ void	store_color(t_game *game, char **rgb_array, int color_type)
 	if (color_type == 5)
 	{
 		game->floor = (ft_atoi(rgb_array[0]) << 24)
-			| (ft_atoi(rgb_array[1]) << 16) | (ft_atoi(rgb_array[2]) << 8) | 255;
+			| (ft_atoi(rgb_array[1]) << 16)
+			| (ft_atoi(rgb_array[2]) << 8) | 255;
 	}
 	else if (color_type == 6)
 	{
 		game->ceil = (ft_atoi(rgb_array[0]) << 24)
-			| (ft_atoi(rgb_array[1]) << 16) | (ft_atoi(rgb_array[2]) << 8) | 255;
+			| (ft_atoi(rgb_array[1]) << 16)
+			| (ft_atoi(rgb_array[2]) << 8) | 255;
 	}
 }
 

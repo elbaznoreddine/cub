@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:49:41 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 12:08:47 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:21:47 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,16 @@ t_list	*list_init(t_game *game)
 	list = malloc(sizeof(t_list));
 	if (!list)
 		return (NULL);
-	list->tail = 64;
+	(1) && (list->tail = 64, list->w = 1280, list->h = 720, list->pi = M_PI);
 	list->rows = game->map->height;
 	list->cols = game->map->width;
 	list->line = game->map->grid;
-	list->w = 1280;
-	list->h = 720;
 	list->ww = list->tail * list->cols;
 	list->wh = list->tail * list->rows;
 	list->mlx = mlx_init(list->w, list->h, "cub3D", 0);
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	list->win = mlx_new_image(list->mlx, list->w, list->h);
 	mlx_image_to_window(list->mlx, list->win, 0, 0);
-	list->pi = M_PI;
 	list->fov = 60 * (list->pi / 180);
 	list->v = game->direction;
 	list->mspeed = 10;
@@ -40,14 +37,6 @@ t_list	*list_init(t_game *game)
 	list->vx = cos(list->v);
 	list->game = game;
 	return (list);
-}
-
-void	anime(void	*param)
-{
-	t_list			*list;
-
-	list = param;
-	(move0(list), move1(list), move11(list), move2(list), draw_p(list));
 }
 
 mlx_texture_t	*load_png_texture(char *path)

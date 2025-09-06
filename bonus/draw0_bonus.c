@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw0_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 13:06:16 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/28 15:08:39 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/09/06 13:11:23 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,53 +120,4 @@ void	anime(void	*param)
 	if (j == 40)
 		j = 0;
 	mlx_delete_texture(texture);
-}
-
-int	to_move0(t_list *list, double y, double x)
-{
-	double	px;
-	double	py;
-
-	py = list->py;
-	px = list->px;
-	if (is_wall(list, py + (y * 20), px + (x * 20)) > 0)
-		return (0);
-	if (is_wall(list, py + (y * 20) + 5, px + (x * 20)) > 0)
-		return (0);
-	if (is_wall(list, py + (y * 20) - 5, px + (x * 20)) > 0)
-		return (0);
-	if (is_wall(list, py + (y * 20), px + (x * 20) + 5) > 0)
-		return (0);
-	if (is_wall(list, py + (y * 20), px + (x * 20) - 5) > 0)
-		return (0);
-	return (1);
-}
-
-int	to_move(t_list *list, double y, double x)
-{
-	int		i;
-	double	px;
-	double	py;
-
-	i = 0;
-	py = list->py;
-	px = list->px;
-	if (!to_move0(list, y, x))
-		return (0);
-	while (i++ < list->mspeed)
-	{
-		py += y;
-		px += x;
-		if (is_wall(list, py, px) > 0)
-			return (0);
-		if (is_wall(list, py + 1, px) > 0)
-			return (0);
-		if (is_wall(list, py - 1, px) > 0)
-			return (0);
-		if (is_wall(list, py, px + 1) > 0)
-			return (0);
-		if (is_wall(list, py, px - 1) > 0)
-			return (0);
-	}
-	return (1);
 }

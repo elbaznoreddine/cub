@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils_parse.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/06 10:08:31 by noel-baz          #+#    #+#             */
+/*   Updated: 2025/09/06 10:08:32 by noel-baz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D.h"
 
 int	init_game(t_game **game)
@@ -68,24 +80,4 @@ void	free_game(t_game *game)
 	if (game->config)
 		free_config(game->config);
 	free(game);
-}
-
-void	print_all_map(t_game *game)
-{
-	if (!game || !game->config || !game->map || !game->map->grid)
-		return;
-	printf("North Path: %s\n", game->config->path_north);
-	printf("South Path: %s\n", game->config->path_south);
-	printf("West Path: %s\n", game->config->path_west);
-	printf("East Path: %s\n", game->config->path_east);
-	printf("Floor Color: %s\n", game->config->floor);
-	printf("Ceil Color: %s\n", game->config->ceil);
-	printf("Map Height: %d\n", game->map->height);
-	printf("Map Width: %d\n", game->map->width);
-	printf("Player dierction: %f\n", game->direction);
-	printf("Player position (%d,%d)\n", game->map->player_x, game->map->player_y);
-	for (int i = 0; game->map->grid[i]; i++)
-	{
-		printf("Map Line %d: [%s]\n", i + 1, game->map->grid[i]);
-	}
 }

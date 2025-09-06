@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/06 10:08:27 by noel-baz          #+#    #+#             */
+/*   Updated: 2025/09/06 10:35:10 by noel-baz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D.h"
 
 int	validate_map_boundaries(t_map *map)
@@ -66,8 +78,7 @@ int	parse_configuration_section(t_game *game, int fd, char **first_map_line)
 	game->config = malloc(sizeof(t_config));
 	if (!game->config)
 		return (0);
-	setup_empty_config(game->config);
-	line = get_next_line(fd);
+	(setup_empty_config(game->config), line = get_next_line(fd));
 	while (line)
 	{
 		if (!line || line[0] == '\0' || line[0] == '\n')
@@ -82,8 +93,7 @@ int	parse_configuration_section(t_game *game, int fd, char **first_map_line)
 			return (free(line), 0);
 		if (process_result == 1)
 			return (check_config_completeness(game->config));
-		free(line);
-		line = get_next_line(fd);
+		(free(line), line = get_next_line(fd));
 	}
 	return (check_config_completeness(game->config));
 }
@@ -111,7 +121,6 @@ int	parse_complete_map_file(t_game *game, char *map_filename)
 		return (close(fd), 0);
 	if (!validate_map_boundaries(game->map))
 		return (close(fd), 0);
-	print_all_map(game);
 	close(fd);
 	return (1);
 }

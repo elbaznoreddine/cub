@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:49:41 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/28 14:07:06 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/09/06 16:45:25 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,16 @@ t_list	*list_init(t_game *game)
 	list = malloc(sizeof(t_list));
 	if (!list)
 		return (NULL);
-	list->tail = 64;
+	(1) && (list->tail = 64, list->w = 1280, list->h = 720, list->pi = M_PI);
 	list->rows = game->map->height;
 	list->cols = game->map->width;
 	list->line = game->map->grid;
-	list->w = 1280;
-	list->h = 720;
 	list->ww = list->tail * list->cols;
 	list->wh = list->tail * list->rows;
 	list->mlx = mlx_init(list->w, list->h, "cub3D", 0);
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	list->win = mlx_new_image(list->mlx, list->w, list->h);
 	mlx_image_to_window(list->mlx, list->win, 0, 0);
-	list->pi = M_PI;
 	list->fov = 60 * (list->pi / 180);
 	list->v = game->direction;
 	list->mspeed = 10;
@@ -42,25 +39,6 @@ t_list	*list_init(t_game *game)
 	list->mouse_flag = 0;
 	list->game = game;
 	return (list);
-}
-
-int	is_wall(t_list *list, double y, double x)
-{
-	double	j;
-	double	i;
-
-	if (x < 0 || x >= list->ww || y < 0 || y >= list->wh)
-		return (1);
-	j = floor(y / list->tail);
-	i = floor(x / list->tail);
-	if (list->line[(int) j][(int) i] == '1'
-		|| list->line[(int) j][(int) i] == 32)
-		return (1);
-	if (list->line[(int) j][(int) i] == 'D')
-		return (2);
-	if (list->line[(int) j][(int) i] == 'd')
-		return (-3);
-	return (0);
 }
 
 mlx_texture_t	*load_png_texture(char *path)

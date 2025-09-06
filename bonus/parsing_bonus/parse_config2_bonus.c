@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_config2_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/06 10:06:32 by noel-baz          #+#    #+#             */
+/*   Updated: 2025/09/06 10:40:12 by noel-baz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D_bonus.h"
 
 int	can_open_texture_file(char *file_path)
@@ -53,8 +65,7 @@ char	*extract_file_path(char *line)
 	if (!path)
 		return (NULL);
 	ft_strncpy(path, line + start, (end - start) + 1);
-	path[end - start] = '\0';
-	return (path);
+	return (path[end - start] = '\0', path);
 }
 
 int	config_element_already_exists(t_config *config, int element_type)

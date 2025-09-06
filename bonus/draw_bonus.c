@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:00:32 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 11:44:07 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/06 13:06:38 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,6 @@ void	draw_line01(t_list *list, double dy, double dx, double step)
 		round(list->py + i * stepy) * list->f, get_rgba(255, 0, 0, 255));
 		i++;
 	}
-}
-
-void	draw_line0(t_list *list, double y, double x)
-{
-	double	dy;
-	double	dx;
-	double	step;
-
-	dy = y - list->py;
-	dx = x - list->px;
-	step = fmax(fabs(dx), fabs(dy));
-	if (step != 0)
-		draw_line01(list, dy, dx, step);
 }
 
 void	draw_p0(t_list *list)
@@ -65,4 +52,23 @@ void	draw_p0(t_list *list)
 		}
 		y++;
 	}
+}
+
+int	is_wall(t_list *list, double y, double x)
+{
+	double	j;
+	double	i;
+
+	if (x < 0 || x >= list->ww || y < 0 || y >= list->wh)
+		return (1);
+	j = floor(y / list->tail);
+	i = floor(x / list->tail);
+	if (list->line[(int) j][(int) i] == '1'
+		|| list->line[(int) j][(int) i] == 32)
+		return (1);
+	if (list->line[(int) j][(int) i] == 'D')
+		return (2);
+	if (list->line[(int) j][(int) i] == 'd')
+		return (-3);
+	return (0);
 }

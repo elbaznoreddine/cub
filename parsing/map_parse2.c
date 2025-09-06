@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_parse2.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/06 10:07:38 by noel-baz          #+#    #+#             */
+/*   Updated: 2025/09/06 10:36:17 by noel-baz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D.h"
 
 int	space_touches_empty_cell(t_map *map, int i, int j)
@@ -25,4 +37,21 @@ int	is_border_position(int i, int j, t_map *map)
 	if (i == 0 || i == map->height - 1 || j == 0 || j == map->width - 1)
 		return (1);
 	return (0);
+}
+
+int	config_type(char *line, int i, int j)
+{
+	if (!ft_strncmp(line + i, "NO", j))
+		return (1);
+	if (!ft_strncmp(line + i, "SO", j))
+		return (2);
+	if (!ft_strncmp(line + i, "WE", j))
+		return (3);
+	if (!ft_strncmp(line + i, "EA", j))
+		return (4);
+	if (!ft_strncmp(line + i, "F", j))
+		return (5);
+	if (!ft_strncmp(line + i, "C", j))
+		return (6);
+	return (-1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yzoullik <yzoullik@student.42.fr>          +#+  +:+       +#+        */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 16:00:32 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/27 16:23:25 by yzoullik         ###   ########.fr       */
+/*   Updated: 2025/09/06 13:04:53 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,12 @@ int	to_move(t_list *list, double y, double x)
 			return (0);
 	}
 	return (1);
+}
+
+void	anime(void	*param)
+{
+	t_list			*list;
+
+	list = param;
+	(move0(list), move1(list), move11(list), move2(list), draw_p(list));
 }

@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:46:43 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/08/29 13:33:44 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/06 10:38:23 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include "/mnt/homes/yzoullik/Documents/MLX42/include/MLX42/MLX42.h"
+# include "/mnt/homes/noel-baz/Documents/MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -115,7 +115,6 @@ char			*ft_strdup(char *s1);
 size_t			ft_strlcat(char *dst, char *src, size_t dstsize);
 char			*ft_strjoin(char *s1, char *s2);
 void			ft_free(char **ptr);
-
 int				parsmap(char *ptr);
 void			move(mlx_key_data_t keydata, void	*param);
 int				move0(t_list *list);
@@ -124,41 +123,32 @@ int				move11(t_list *list);
 int				move2(t_list *list);
 void			draw_p(t_list *list);
 void			draw_p0(t_list *list);
-
 void			draw_minimap(t_list *list);
 void			anime(void	*param);
 int				to_move(t_list *list, double y, double x);
-
 void			draw_line0(t_list *list, double y, double x);
-
 void			draw_p(t_list *list);
 int				is_wall(t_list *list, double y, double x);
-
 void			h_dda(t_list *list, double nexty, double nextx);
 void			v_dda(t_list *list, double nexty, double nextx);
 void			h_p(t_list *list, double v, double *y, double *x);
 void			v_p(t_list *list, double v, double *y, double *x);
-
 int				get_rgba(int r, int g, int b, int a);
 double			dis(t_list *list, double y, double x);
 void			ft_free(char **ptr);
-
 void			set_var(t_list *list);
 void			reset_ang(t_list *list, double *v);
 int				is_door(t_list *list);
 void			draw_wall_texture(t_list *list, int screen_x, double ray_angle);
 mlx_texture_t	*get_wall_texture(t_list *list, double ray_angle);
-
 int				load_textures(t_list *list);
 void			mouse(double xpos, double ypos, void *param);
-// utils function
 size_t			ft_strlen(const char *str);
 char			*ft_strchr(const char *s, int c);
 int				ft_strcmp(const char *s1, const char *s2);
 char			*ft_substr(char *s, unsigned int index, size_t bytes);
 char			*ft_strjoin(char *s1, char *s2);
 char			*ft_strdup(char *s);
-// parsing map
 int				ft_check_map_extension(char *exten);
 int				init_game(t_game **game);
 int				parse_complete_map_file(t_game *game, char *map_filename);
@@ -175,6 +165,7 @@ int				setup_empty_config(t_config *config);
 int				process_config_line(t_game *game, char *line, int *element_type,
 					char **first_map_line);
 int				check_config_completeness(t_config *config);
+int				config_type(char *line, int i, int j);
 int				read_entire_map_content(t_game *game, int fd,
 					char *first_map_line);
 int				count_player(t_game *game, t_map *map);

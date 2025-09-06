@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_config.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/06 10:07:41 by noel-baz          #+#    #+#             */
+/*   Updated: 2025/09/06 10:30:59 by noel-baz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cub3D.h"
 
 int	is_valid_config_character(char c)
@@ -28,18 +40,7 @@ int	identify_config_type(char *line)
 			j++;
 			k++;
 		}
-		if (!ft_strncmp(line + i, "NO", j))
-			return (1);
-		if (!ft_strncmp(line + i, "SO", j))
-			return (2);
-		if (!ft_strncmp(line + i, "WE", j))
-			return (3);
-		if (!ft_strncmp(line + i, "EA", j))
-			return (4);
-		if (!ft_strncmp(line + i, "F", j))
-			return (5);
-		if (!ft_strncmp(line + i, "C", j))
-			return (6);
+		return (config_type(line, i, j));
 	}
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:10:09 by noel-baz          #+#    #+#             */
-/*   Updated: 2025/08/27 12:10:10 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/06 17:52:17 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,13 @@ static void	calculate_wall_position(t_list *list, double ray_angle,
 }
 
 static int	calculate_texture_x(mlx_texture_t *texture, double wall_x,
-							t_list *list, int side)
+							t_list *list)
 {
 	double	offset;
 	int		tex_x;
-	double	ray_dir_x;
-	double	ray_dir_y;
 
 	offset = fmod(wall_x, (double)list->tail) / (double)list->tail;
-	if (offset < 0)
-		offset += 1.0;
 	tex_x = (int)(offset * texture->width);
-	if (tex_x < 0)
-		tex_x = 0;
-	if (tex_x >= (int)texture->width)
-		tex_x = texture->width - 1;
-	ray_dir_x = cos(list->ray_angle);
-	ray_dir_y = sin(list->ray_angle);
-	if ((side == 0 && ray_dir_x < 0) || (side == 1 && ray_dir_y > 0))
-		tex_x = texture->width - tex_x - 1;
 	return (tex_x);
 }
 
@@ -58,8 +46,6 @@ static uint32_t	get_pixel_color(mlx_texture_t *texture, int tex_x, int ty)
 	int			pixel_index;
 	uint32_t	color;
 
-	if (ty < 0)
-		ty = 0;
 	if (ty >= (int)texture->height)
 		ty = texture->height - 1;
 	pixel_index = (ty * texture->width + tex_x) * 4;
@@ -78,8 +64,6 @@ static void	render_wall_column(t_list *list, mlx_texture_t *texture,
 	int		sy;
 
 	wall_height = list->down - list->top;
-	if (wall_height <= 0)
-		return ;
 	tex_step = (double)texture->height / wall_height;
 	tex_pos = 0.0;
 	sy = list->top;
@@ -107,6 +91,6 @@ void	draw_wall_texture(t_list *list, int screen_x, double ray_angle)
 		return ;
 	calculate_wall_position(list, ray_angle, &wall_x, &side);
 	list->ray_angle = ray_angle;
-	tex_x = calculate_texture_x(texture, wall_x, list, side);
+	tex_x = calculate_texture_x(texture, wall_x, list);
 	render_wall_column(list, texture, screen_x, tex_x);
 }
