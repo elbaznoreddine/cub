@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 13:06:16 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/09/06 13:11:23 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:07:34 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char	*get_img(int j)
 		free(ptr1);
 		return (0);
 	}
+	free(ptr1);
 	ptr = ft_strjoin(ptr, ".png");
 	if (!ptr)
 		return (0);

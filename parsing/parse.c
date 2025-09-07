@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 10:08:27 by noel-baz          #+#    #+#             */
-/*   Updated: 2025/09/06 10:35:10 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:22:11 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ int	parse_map_section(t_game *game, int fd, char *first_map_line)
 	game->map->grid = NULL;
 	game->map->height = 0;
 	game->map->width = 0;
-	game->map->player_x = 0;
-	game->map->player_y = 0;
 	if (!read_entire_map_content(game, fd, first_map_line))
 		return (free(first_map_line), 0);
 	free(first_map_line);

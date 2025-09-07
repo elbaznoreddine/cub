@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 15:19:23 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/09/06 10:00:12 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/07 15:15:28 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	move(mlx_key_data_t keydata, void	*param)
 
 	list = param;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		exit(0);
+		clean_close(list);
 	if (move0(list) || move1(list) || move11(list) || move2(list))
 		draw_p(list);
 }

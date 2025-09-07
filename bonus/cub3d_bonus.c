@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:49:41 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/09/06 16:45:25 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:29:12 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,22 @@ int	load_all_textures(t_list *list)
 		return (0);
 	list->south_texture = load_png_texture(list->game->config->path_south);
 	if (!list->south_texture)
-		return (0);
+		return (mlx_delete_texture(list->north_texture), 0);
 	list->east_texture = load_png_texture(list->game->config->path_east);
 	if (!list->east_texture)
-		return (0);
+		return (mlx_delete_texture(list->north_texture),
+			mlx_delete_texture(list->south_texture), 0);
 	list->west_texture = load_png_texture(list->game->config->path_west);
 	if (!list->west_texture)
-		return (0);
+		return (mlx_delete_texture(list->north_texture),
+			mlx_delete_texture(list->south_texture),
+			mlx_delete_texture(list->east_texture), 0);
 	list->door_texture = load_png_texture("textures/c.png");
 	if (!list->door_texture)
-		return (0);
+		return (mlx_delete_texture(list->north_texture),
+			mlx_delete_texture(list->south_texture),
+			mlx_delete_texture(list->east_texture),
+			mlx_delete_texture(list->west_texture), 0);
 	return (1);
 }
 
@@ -83,6 +89,7 @@ int	logic(t_list *list, t_game *game)
 	draw_p0(list);
 	mlx_key_hook(list->mlx, &move, list);
 	mlx_loop_hook(list->mlx, &anime, list);
+	mlx_close_hook(list->mlx, &close_window, list);
 	mlx_loop(list->mlx);
 	mlx_terminate(list->mlx);
 	return (1);
@@ -107,7 +114,8 @@ int	main(int ac, char **av)
 		return (write(2, "Error\nThe config or Map not valid\n", 35), 1);
 	}
 	if (!logic(list, game))
-		write(2, "Error\ntextures can't load\n", 27);
-	free_game(game);
+		return (free_game(game), free(list),
+			write(2, "Error\ntextures can't load\n", 27), 1);
+	clean_close(list);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/19 15:19:23 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/09/06 13:12:04 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/07 15:06:45 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	move(mlx_key_data_t keydata, void	*param)
 		&& list->mouse_flag)
 		list->mouse_flag = 0;
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		exit(0);
+		clean_close(list);
 	if (keydata.key == MLX_KEY_O && keydata.action == MLX_PRESS)
 		open_door(list);
 	if (keydata.key == MLX_KEY_C && keydata.action == MLX_PRESS)

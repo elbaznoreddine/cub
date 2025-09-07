@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/06 10:07:35 by noel-baz          #+#    #+#             */
-/*   Updated: 2025/09/06 10:07:36 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:22:40 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ int	count_player(t_game *game, t_map *map)
 			if (is_player_character(map->grid[i][j]))
 			{
 				set_player_facing_direction(game, map->grid[i][j]);
-				game->map->player_x = j;
-				game->map->player_y = i;
 				player_count++;
 			}
 			j++;

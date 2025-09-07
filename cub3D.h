@@ -6,7 +6,7 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 11:46:43 by yzoullik          #+#    #+#             */
-/*   Updated: 2025/09/06 13:05:14 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/07 16:37:34 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <math.h>
-# include "/mnt/homes/noel-baz/Documents/MLX42/include/MLX42/MLX42.h"
+# include "/mnt/homes/yzoullik/Documents/MLX42/include/MLX42/MLX42.h"
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
@@ -40,22 +40,13 @@ typedef struct s_map
 	char	**grid;
 	int		width;
 	int		height;
-	int		player_x;
-	int		player_y;
 }				t_map;
 
 typedef struct s_game
 {
-	void			*mlx;
-	void			*win;
-	void			*player;
 	double			direction;
 	unsigned int	ceil;
 	unsigned int	floor;
-	void			*img_north;
-	void			*img_south;
-	void			*img_east;
-	void			*img_west;
 	t_map			*map;
 	t_config		*config;
 }					t_game;
@@ -131,6 +122,8 @@ double			dis(t_list *list, double y, double x);
 void			ft_free(char **ptr);
 void			set_var(t_list *list);
 void			reset_ang(t_list *list, double *v);
+void			clean_close(t_list *list);
+void			close_window(void	*param);
 void			draw_wall_texture(t_list *list, int screen_x, double ray_angle);
 mlx_texture_t	*get_wall_texture(t_list *list, double ray_angle);
 size_t			ft_strlen(const char *str);
