@@ -6,20 +6,15 @@
 /*   By: noel-baz <noel-baz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:10:20 by noel-baz          #+#    #+#             */
-/*   Updated: 2025/09/06 17:57:10 by noel-baz         ###   ########.fr       */
+/*   Updated: 2025/09/09 10:02:44 by noel-baz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-static void	calculate_wall_position(t_list *list, double ray_angle,
+static void	calculate_wall_position(t_list *list,
 							double *wall_x, int *side)
 {
-	double	ray_dir_x;
-	double	ray_dir_y;
-
-	ray_dir_x = cos(ray_angle);
-	ray_dir_y = sin(ray_angle);
 	if (list->hd < list->vd)
 		*side = 1;
 	else
@@ -89,7 +84,7 @@ void	draw_wall_texture(t_list *list, int screen_x, double ray_angle)
 	texture = get_wall_texture(list, ray_angle);
 	if (!texture || !texture->pixels)
 		return ;
-	calculate_wall_position(list, ray_angle, &wall_x, &side);
+	calculate_wall_position(list, &wall_x, &side);
 	list->ray_angle = ray_angle;
 	tex_x = calculate_texture_x(texture, wall_x, list);
 	render_wall_column(list, texture, screen_x, tex_x);
